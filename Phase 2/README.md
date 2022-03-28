@@ -11,16 +11,32 @@ Our approach includes the following classes inside the program:
   - `Board`: for internal representation of the board.
   - `Piece`: abstract class representing a piece.
   - `Pawn`: one of the classes that inherits the Piece class and implements the specific behavior.
-  - `Rook`, `Knight`, `Bishop`, `King`, `Queen`: these classes inherit the Piece class too and exist only for defining the board.
+  - `Rook`, `Knight`, `Bishop`, `King`, `Queen`: these classes inherit the Piece class too and implements the specific behavior.
   - `Coordonate`: here we define the coordinates.
+  - `Move`: here we store informations about a move.
+  - `En passant`: here we keep the coordonate of the pawn that can be captured when doing En passant.
+  - `Ray`: this class allows the line traversal of the board and calculates the danger of the previous cell (taking into consideration the rest of the pieces).
 
 ## Algorithmic approach
-While receiving input from the xboard, we analyse it and then proceed with the specific command on the board. The complexity of these operations is `O(1)`.
+În timpul receptionarii comenzilor primite la stdin de la xboard, noi le vom
+analiza și vom putea interpreta comanda sau simula mișcarea primită în structura
+internă a programului, acest lucru fiind realizat în complexitate O(1).
 
-In order to make a move (both calculus and sending the command to stdout), we will generate a list of possibles pieces that can be moved by traversal of all the pieces from the current state of the board. These operations depend on the number of pieces on the board, complexity being `O(N)`, where N < 50.
 
-During this phase, we choose randomly the pawn (from the available ones) that will be moved first. This selection takes `O(1)` so it does not influence the overall
-complexity of the program
+Pentru a realiza o mișcare (calculul unei mișcării și trimiterea ei la stdout), noi
+vom genera lista de piese care pot fi mutate, acest lucru fiind realizat printr-o
+parcurgere a unei liste de piese aflate pe tablă, căutare ce se realizează în
+complexitate O(n), n fiind numărul de piese de pe tablă.
+
+
+În implementarea noastră, piesa care urmează a fi mutată este aleasă în mod
+aleator dintre piesele disponibile. Această selecție este realizată în O(1), deci nu
+influențează complexitatea algoritmului.
+
+
+Parcurgerea board-ului în implementarea clasei Ray pentru a determina dacă o
+piesă se află în șah sau în pericolul de a intra în șah este realizata în O(n), n fiind
+dimensiunea tablei.
 
 ## Bibliography
 Some of the sources we used for [creating the Makefile](https://makefiletutorial.com/), [debugging methods/classes](https://docs.oracle.com/en/java/), [better understanding of the xboard](https://www.gnu.org/software/xboard/engine-intf.html)
